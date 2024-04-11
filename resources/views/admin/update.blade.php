@@ -22,19 +22,19 @@
                                 </div>
                             </div>
                             <div class="d-flex flex-row justify-content-center">
-                                <h1>Add Product</h1>
+                                <h1>Update Product</h1>
                             </div>
                             <div class="row">
                                 <div class="container justify-content-center">
                                     <div class="col-md-12">
                                         <div class="card p-4 m-5">
-                                            <form action="{{ route('admin.productadd', ['id' => $user->name]) }}"
+                                            <form action="{{ route('admin.update',['id'=>$item->id]) }}"
                                                 method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="name">Product Name</label>
                                                     <input type="text" name="name"class="form-control"
-                                                        value={{ old('name') }}>
+                                                        value={{ $item->name}}>
                                                     <span class="text-danger">
                                                         @error('name')
                                                             {{ $message }}
@@ -43,17 +43,17 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="description">Product Details</label>
-                                                    <textarea type="text" name="details" row="4" class="form-control" value="{{ old('description') }}"></textarea>
+                                                    <textarea type="text" name="details" row="4" class="form-control" >{{ $item->details }}</textarea>
                                                     <span class="text-danger">
-                                                        @error('description')
+                                                        @error('details')
                                                             {{ $message }}
                                                         @enderror
                                                     </span>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="name">Price</label>
+                                                    <label for="price">Price</label>
                                                     <input type="number" name="price" class="form-control"
-                                                        value={{ old('price') }}>
+                                                        value={{ $item->price }}>
                                                     <span class="text-danger">
                                                         @error('price')
                                                             {{ $message }}
@@ -61,9 +61,9 @@
                                                     </span>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="name">Discount Price</label>
+                                                    <label for="discount">Discount Price</label>
                                                     <input type="number" name="dis_price" class="form-control"
-                                                        value={{ old('dis_price') }}>
+                                                        value={{ $item->discount}}>
                                                     <span class="text-danger">
                                                         @error('dis_price')
                                                             {{ $message }}
@@ -82,6 +82,11 @@
                                                         <option value="shoe">Shoe</option>
 
                                                     </select>
+                                                    <span class="text-danger">
+                                                        @error('catagory')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="image">Product Image</label>
@@ -92,7 +97,7 @@
                                                         @enderror
                                                     </span>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Add Product</button>
+                                                <button type="submit" class="btn btn-primary">Update Product</button>
                                             </form>
                                         </div>
                                     </div>

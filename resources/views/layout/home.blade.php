@@ -10,6 +10,7 @@
       <meta name="keywords" content="" />
       <meta name="description" content="" />
       <meta name="author" content="" />
+      <base href="/public">
       <link rel="shortcut icon" href="images/favicon.png" type="">
       <title>@yield('title')</title>
       <!-- bootstrap core css -->
@@ -24,7 +25,7 @@
 
    <body>
     @include('home.navbar')
-@yield('basic')
+    @yield('basic')
       <!-- jQery -->
       <script src="homepage/js/jquery-3.4.1.min.js"></script>
       <!-- popper js -->

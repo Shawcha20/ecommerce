@@ -45,27 +45,27 @@
                       <i class="fa fa-search" aria-hidden="true"></i>
                   </a>
               </li>
-              @if (request()->is('home') )
-                  <li class="nav-item">
-                      <a href="{{ route('home.login') }}"> <button
-                              class="btn btn-outline-primary my-2 my-sm-0" type="button">Sign In</button></a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('home.signup') }}"><button
-                              class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button">Sign
-                              Up</button> </a>
-                  </li>
-              @elseif (request()->is('login')|| request()->is('signup'))
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Account
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="{{ route('login.logout') }}">Log Out</a>
-                      </div>
-                  </li>
-              @endif
+              @if (!isset($user) )
+              <li class="nav-item">
+                  <a href="{{ route('home.login') }}"> <button
+                          class="btn btn-outline-primary my-2 my-sm-0" type="button">Sign In</button></a>
+              </li>
+              <li class="nav-item">
+                  <a href="{{ route('home.signup') }}"><button
+                          class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button">Sign
+                          Up</button> </a>
+              </li>
+          @else
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ $user->name }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ route('login.logout') }}">Log Out</a>
+                  </div>
+              </li>
+          @endif
           </ul>
       </div>
     </div>

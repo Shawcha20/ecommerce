@@ -7,17 +7,18 @@
           </h2>
        </div>
        <div class="row">
-        @foreach ($product as $item )
-
-        @endforeach
+        @if(isset($product))
+        @foreach ($product as $item)
           <div class="col-sm-6 col-md-4 col-lg-4">
-             <div class="box">
+
+            <div class="box">
                 <div class="option_container">
                    <div class="options">
-                      <a href="" class="option1">
-                      product details
-                      </a>
+
                       @isset($user)
+                      <a href="{{ route('product.show',['id'=>$item->id,'user'=>$user->id]) }}" class="option1">
+                        product details
+                     </a>
                       <a href="/product/{{$user->name}}/cart" class="option2">
                         Buy Now
                         </a>
@@ -25,6 +26,9 @@
                           add to cart
                           </a>
                       @else
+                      <a href="{{ route('product.show',['id'=>$item->id]) }}" class="option1">
+                        product details
+                     </a>
                        <a href="{{url('/product/login')}}" class="option2">
                         Buy Now
                         </a>
@@ -37,19 +41,30 @@
                    </div>
                 </div>
                 <div class="img-box">
-                   <img src="/homepage/images/p1.png" alt="">
+                   <img src="/products/{{ $item->image }}" alt="">
                 </div>
                 <div class="detail-box">
                    <h5>
-                      Men's Shirt
+                     {{ $item->name}}
                    </h5>
                    <h6>
-                      $75
+                      @if (isset($item->discount))
+                      {{ $item->discount }}
+                      <strike>{{ $item->price }}</strike>
+                      @else
+                        {{ $item->price }}
+                      @endif
                    </h6>
                 </div>
              </div>
           </div>
-       </div>
+          @endforeach
+          @endif
+        </div>
+        <span class="mt-5 justify-content-center d-flex">
+            <!-- /* $product->appends(Request::all())->links() */-->
+            {!! $product->withQueryString()->links('pagination::bootstrap-5') !!}
+        </span>
        <div class="btn-box">
           <a href="">
           View All products

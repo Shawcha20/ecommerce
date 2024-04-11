@@ -1,3 +1,4 @@
+<div class="container-scroller">
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
       <a class="sidebar-brand brand-logo" href="index.html"><img src="/adminpanel/template/assets/images/logo.svg" alt="logo" /></a>
@@ -122,8 +123,9 @@
         </a>
         <div class="collapse" id="auth">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.addproduct')}}"> Add Product </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> See Products </a></li>
+            <li class="nav-item"> <a class="nav-link" href="/admin/{{ $user->name}}/productadd"> Add Product </a></li>
+            <li class="nav-item"> <a class="nav-link" href="#"> Add Offer </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.showproduct',['id'=>$user->name]) }}"> See Products </a></li>
           </ul>
         </div>
       </li>

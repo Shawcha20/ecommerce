@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/adminpanel/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/adminpanel/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="/adminpanel/template/assets/vendors/jvectormap/jquery-jvectormap.css">
@@ -21,13 +22,22 @@
     <link rel="stylesheet" href="/adminpanel/template/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="/adminpanel/template/assets/images/favicon.png" />
-  </head>
-  <body>  
-    @include('admin.adminnavbar')
+</head>
+
+<body>
+    <h1>
+        @if(isset($success))
+       <div class="alert alert-success alert-dismissible fade show" role="alert">
+           {{ $success }}
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times</span>
+           </button>
+       </div>
+       @endif</h1>
     @include('admin.adminsidebar')
-    @yield('admin') 
-    @include('admin.adminfooter')
-  <!-- container-scroller -->
+    @include('admin.adminnavbar')
+    @yield('admin')
+    <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="/adminpanel/template/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
@@ -48,5 +58,6 @@
     <!-- Custom js for this page -->
     <script src="/adminpanel/template/assets/js/dashboard.js"></script>
     <!-- End custom js for this page -->
-  </body>
+</body>
+
 </html>

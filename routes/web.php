@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homepageController;
 use App\Http\Controllers\loginController;
@@ -22,5 +21,11 @@ Route::post('/login/{id}/forgetdone', [loginController::class, 'forgetdone'])->n
 //product
 Route::get('product/{id}/cart', [productController::class, 'buycart'])->name('product.buycart');
 Route::get('product/login',[productController::class,'buycarterror'])->name('product.error');
+Route::get('product/{id}/{user?}', [productController::class, 'showproduct'])->name('product.show');
 // admin
-Route::get('admin/productadd', [adminController::class, 'add'])->name('admin.addproduct');
+Route::get('admin/{id}/productadd', [adminController::class, 'add'])->name('admin.addproduct');
+Route::post('/admin/{id}/addproduct', [adminController::class, 'adddata'])->name('admin.productadd');
+Route::get('/adming/{id}/showproduct', [adminController::class, 'show'])->name('admin.showproduct');
+Route::get('/admin/{id}/{id1}/update', [adminController::class, 'update'])->name('admin.updated');
+Route::post('/admin/{id}/update', [adminController::class, 'updatedata'])->name('admin.update');
+Route::get('/admin/{id}/delete', [adminController::class, 'delete'])->name('admin.delete');
