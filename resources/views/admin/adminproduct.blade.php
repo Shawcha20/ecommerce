@@ -1,8 +1,6 @@
 @extends('layout.admin')
 @section('title', 'adminpage')
 @section('admin')
-
-
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="row">

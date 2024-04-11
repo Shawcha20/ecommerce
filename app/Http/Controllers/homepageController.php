@@ -20,4 +20,10 @@ class homepageController extends Controller
     {
         return view('registration');
     }
+    public function cartshow($id=null)
+    {
+        $user=Reg::find($id);
+        $cart_items= Cart::all();
+        return view('home.cart',compact('user', 'cart_items'));
+    }
 }

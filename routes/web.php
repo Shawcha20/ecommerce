@@ -22,6 +22,7 @@ Route::post('/login/{id}/forgetdone', [loginController::class, 'forgetdone'])->n
 Route::get('product/{id}/cart', [productController::class, 'buycart'])->name('product.buycart');
 Route::get('product/login',[productController::class,'buycarterror'])->name('product.error');
 Route::get('product/{id}/{user?}', [productController::class, 'showproduct'])->name('product.show');
+Route::get('productaddcart/{id}/{user_id}', [ProductController::class, 'addcart'])->name('home.addcart');
 // admin
 Route::get('admin/{id}/productadd', [adminController::class, 'add'])->name('admin.addproduct');
 Route::post('/admin/{id}/addproduct', [adminController::class, 'adddata'])->name('admin.productadd');
@@ -29,3 +30,5 @@ Route::get('/adming/{id}/showproduct', [adminController::class, 'show'])->name('
 Route::get('/admin/{id}/{id1}/update', [adminController::class, 'update'])->name('admin.updated');
 Route::post('/admin/{id}/update', [adminController::class, 'updatedata'])->name('admin.update');
 Route::get('/admin/{id}/delete', [adminController::class, 'delete'])->name('admin.delete');
+//homepage
+Route::get('home/cart/{id?}', [homepageController::class, 'cartshow'])->name('home.cart');

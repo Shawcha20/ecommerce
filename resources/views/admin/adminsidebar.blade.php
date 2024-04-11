@@ -110,7 +110,7 @@
           <span class="menu-icon">
             <i class="mdi mdi-contacts"></i>
           </span>
-          <span class="menu-title">Users</span>
+          <span class="menu-title">Orders</span>
         </a>
       </li>
       <li class="nav-item menu-items">

@@ -36,9 +36,16 @@
           </ul>
           <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                  <a class="nav-link" href="#">
-                      <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                  </a>
+                @if (isset($user))
+                <a class="nav-link" href="{{ route('home.cart',['id'=>$user->id]) }}">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </a>
+                @else
+                <a class="nav-link" href="{{ route('product.error') }}">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </a>
+                @endif
+
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="#">
