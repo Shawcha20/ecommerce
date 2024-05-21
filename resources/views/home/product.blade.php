@@ -19,10 +19,10 @@
                       <a href="{{ route('product.show',['id'=>$item->id,'user'=>$user->id]) }}" class="option1">
                         product details
                      </a>
-                      <a href="/product/{{$user->name}}/cart" class="option2">
+                      <a href="{{ route('buySingle.cart',['id'=>$item->id,'user'=>$user->id]) }}" class="option2">
                         Buy Now
                         </a>
-                        <a href="/product/{{$user->name}}/cart" class="option2">
+                        <a href="{{ route('home.addcart',['id'=>$item->id,'user_id'=>$user->id]) }}" class="option2">
                           add to cart
                           </a>
                       @else
@@ -34,7 +34,7 @@
                         </a>
 
                         <a href="{{url('/product/login')}}" class="option2">
-                          add to cart
+                          Add to cart
                           </a>
                       @endisset
 
@@ -50,7 +50,7 @@
                    <h6>
                       @if (isset($item->discount))
                       {{ $item->discount }}
-                      <strike>{{ $item->price }}</strike>
+                      <strike class="text-danger">{{ $item->price }}</strike>
                       @else
                         {{ $item->price }}
                       @endif
@@ -59,17 +59,18 @@
              </div>
           </div>
           @endforeach
-          @endif
-        </div>
-        <span class="mt-5 justify-content-center d-flex">
+          <span class="mt-5 justify-content-center d-flex">
             <!-- /* $product->appends(Request::all())->links() */-->
             {!! $product->withQueryString()->links('pagination::bootstrap-5') !!}
         </span>
-       <div class="btn-box">
+          @endif
+        </div>
+
+       {{-- <div class="btn-box">
           <a href="">
           View All products
           </a>
-       </div>
+       </div> --}}
     </div>
  </section>
  <!-- end product section -->

@@ -5,8 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\product;
 use App\Models\Reg;
+use App\Models\Buy;
 class adminController extends Controller
 {
+    public function order($id)
+    {
+        $user=Reg::find($id);
+        $orders= Buy::all();
+        return view('admin.adminorder',compact('user','orders'));
+    }
     public function add($id)
     {
          $user=Reg::where('name',$id)->first();
@@ -18,7 +25,7 @@ class adminController extends Controller
         $product= new product;
         $imagename=time().'.'.$req->image->extension();
         $req->image->move(public_path('products'),$imagename);
-        $product->name= $req->name;
+        $product->name= strtolower($req->name);
         $product->details=$req->details;
         $product->price= $req->price;
         $product->discount=$req->dis_price;

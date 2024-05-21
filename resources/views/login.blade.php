@@ -30,7 +30,7 @@
     </div>
 @endif
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-  
+
         <div class="card">
             <h2 class="text-center mb-4">Sign In</h2>
             <form action="{{route('login.index')}}" method="post">
@@ -38,22 +38,22 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="Enter your email" name="email">
-                    <span class="text-danger">  
+                    <span class="text-danger">
                         @error('email')
-                        
+
                             {{$message}}
-                        
+
                         @enderror
                     </span>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
-                  <span class="text-danger">  
+                  <span class="text-danger">
                     @error('password')
-                    
+
                         {{$message}}
-                    
+
                     @enderror
                 </span>
                 </div>
@@ -62,7 +62,9 @@
                     <label class="form-check-label" for="rememberMe">Remember me</label>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
             </form>
+            <a href="{{ route('home.signup') }}" class="btn btn-primary mb-2 mt-2">Sign Up</a>
             <div class="text-center mt-3">
                 <a href="{{route('login.forget')}}">Forgot password?</a>
             </div>

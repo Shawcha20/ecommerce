@@ -106,11 +106,11 @@
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="pages/icons/mdi.html">
+        <a class="nav-link" href="{{ route('product.order',['id'=>$user->id]) }}">
           <span class="menu-icon">
             <i class="mdi mdi-contacts"></i>
           </span>
-          <span class="menu-title">Orders</span>
+        <span class="menu-title">Orders</span>
         </a>
       </li>
       <li class="nav-item menu-items">

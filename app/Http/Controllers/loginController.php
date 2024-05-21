@@ -55,7 +55,7 @@ class loginController extends Controller
             'permanent_address' => 'required',
             'city' => 'required'
         ]);
-
+        $product=product::paginate(10);
         $user = new Reg;
         $user->name = $req->name;
         $user->email = $req->email;
@@ -67,7 +67,7 @@ class loginController extends Controller
         $user->city = $req->city;
         $user->save();
         Session::put('user', $user);
-        return view('home.homepage',compact('user'));
+        return view('home.homepage',compact('user', 'product'));
     }
 
     public function logout()
