@@ -7,6 +7,7 @@ use App\Models\product;
 use App\Models\Reg;
 use App\Models\Buy;
 use App\Models\Offers;
+use RealRashid\SweetAlert\Facades\Alert;
 class adminController extends Controller
 {
     public function order($id)

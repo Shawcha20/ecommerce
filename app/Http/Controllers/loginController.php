@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Reg;
 use App\Models\product;
 use App\Models\Buy;
+use App\Models\offers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 class loginController extends Controller
@@ -20,6 +21,7 @@ class loginController extends Controller
             'password.required' => 'Password is required.'
         ]);
         $product= product::paginate(10);
+        $offer=offers::all();
         $user = Reg::where('email', $req->email)->first();
         if ($user && Hash::check($req->password, $user->password)) {
             // Authentication successful
@@ -28,9 +30,9 @@ class loginController extends Controller
             if ($req->has('remember')) {
                 // Set a "Remember Me" cookie
                 $cookie = cookie('remember_token', $user->remember_token, 60 * 24 * 30);
-                return view('home.homepage',compact('user','product'))->withCookie($cookie);
+                return view('home.homepage',compact('user','product','offer'))->withCookie($cookie);
             }
-            return view('home.homepage',compact('user','product'));
+            return view('home.homepage',compact('user','product','offer'));
         }
         else{
             $product= product::all()->count();
