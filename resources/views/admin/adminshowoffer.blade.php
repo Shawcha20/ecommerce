@@ -1,4 +1,3 @@
-
 @extends('layout.admin')
 @section('title', 'adminpage')
 @section('admin')
@@ -26,35 +25,27 @@
                                     @endif
                         </div>
                         <div class="d-flex flex-row justify-content-center">
-                            <h1>Show Ordered Products</h1>
+                            <h1>Show Offers</h1>
                         </div>
                         <div class="row">
                             <table class="table">
                                 <thead class="thead-dark text-center">
                                     <tr>
                                         <th scope="col">Sl no</th>
-                                        <th scope="col">Product Name</th>
-                                        <th scope="col">Product price</th>
-                                        <th scope="col">Image</th>
-                                        <th scope="col">Buyer</th>
-                                        <th scope="col">address</th>
-                                        <th scope="col">Contact</th>
-                                        <th scope="col">Order Status</th>
-                                        <th scope="col">Update order</th>
+                                        <th scope="col">Offer Title</th>
+                                        <th scope="col">Offer product</th>
+                                        <th scope="col">Offer Description</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-white">
-                                    @foreach ($orders as $item)
+                                    @foreach ($offer as $item)
                                     <tr>
                                         <th scope="row">{{ $item->id }}</th>
-                                        <td>{{ $item->product_name }}</td>
-                                        <td>{{ $item->product_price }}</td>
-                                        <td><img src="/products/{{ $item->image }}" alt="" style="height: 200px;width: 150px;  object-fit: cover;"></td>
-                                        <td>{{ $item->user_name}}</td>
-                                        <td>{{ $item->user_address}}</td>
-                                        <td>{{ $item->user_contact }}</td>
-                                        <td>{{ $item->status }}</td>
-                                        <td><div class="btn btn-primary"><a href="{{ route('order.goupdate',['id'=>$item->id,'user'=>$user->id]) }}" class="text-white">update</a></div></td>
+                                        <td>{{ $item->offerTitle}}</td>
+                                        <td>{{ $item->offerProduct }}</td>
+                                        <td>{{ $item->offerDes }}</td>
+                                        <td><div class="btn btn-primary"><a href="{{ route('admin.updateoffer',['id'=>$item->id,'user'=>$user->id]) }}" class="text-white">update</a></div></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

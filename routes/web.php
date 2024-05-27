@@ -6,11 +6,7 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\StripePaymentController;
-Route::controller(StripePaymentController::class)->group(function()
-{
-    Route::get('stripe','stripe')->name('stripe');
-    Route::post('stripe','stripePost')->name('stripe.post');
-});
+
 
 // Route::get('/login', [homepageController::class, 'login'])->name('home.login');
 // Route::get('/reg',[homepageController::class, 'signup'])->name('home.signup');
@@ -35,12 +31,13 @@ Route::get('product/{id}/{user?}', [productController::class, 'showproduct'])->n
 Route::get('productaddcart/{id}/{user_id}', [ProductController::class, 'addcart'])->name('home.addcart');
 Route::get('productdeletecart/{id}/{user_id}',[ProductController::class,'delete'])->name('cart.delete');
 Route::post('/buy/cart/{user}', [ProductController::class, 'buy'])->name('buy.cart');
-Route::get('/buy/cart/{id}/{user}',[ProductController::class,'buySingle'])->name('buySingle.cart');
+Route::get('/buy/cart/{id}/{user}',[StripePaymentController::class,'singlebuy'])->name('buySingle.cart');
 Route::get('/buy/order/{user}',[ProductController::class,'show_order'])->name('showOrder.buy');
 Route::get('/cancle/order/{id}/{user_id}', [ProductController::class, 'cancle_order'])->name('cancle.buy');
 Route::post('/search/product/{user_id?}',[ProductController::class,'search_product'])->name('search.product');
 Route::get('/home/products/{user_id?}',[ProductController::class,'products'])->name('product.home');
 // admin
+Route::get('admin/showadmin/{user_id}',[adminController::class,'showDashboard'])->name('admin.show');
 Route::get('admin/{id}/productadd', [adminController::class, 'add'])->name('admin.addproduct');
 Route::post('/admin/{id}/addproduct', [adminController::class, 'adddata'])->name('admin.productadd');
 Route::get('/adming/{id}/showproduct', [adminController::class, 'show'])->name('admin.showproduct');
@@ -48,7 +45,15 @@ Route::get('/admin/{id}/{id1}/update', [adminController::class, 'update'])->name
 Route::post('/admin/{id}/update', [adminController::class, 'updatedata'])->name('admin.update');
 Route::get('/admin/{id}/delete', [adminController::class, 'delete'])->name('admin.delete');
 Route::get('/admin/{id}/order',[adminController::class,'order'])->name('product.order');
+Route::get('/admin/{id}/offer',[adminController::class,'goOffer'])->name('gooffer.product');
+Route::post('/admin/{id}/updateorder',[adminController::class,'updateorder'])->name('update.order');
+Route::get('/admingoupdate/{id}/{user}',[adminController::class,'goupdate'])->name('order.goupdate');
+Route::post('addoffer/admin', [adminController::class, 'offer'])->name('admin.offer');
+Route::get('/showoffer/{user}',[adminController::class,'showoffer'])->name('admin.showoffer');
+Route::get('/updateoffer/{id}/{user}',[adminController::class,'updateoffer'])->name('admin.updateoffer');
+Route::post('/updateoffer/{user}', [adminController::class, 'updateOfferpost'])->name('admin.updateofferpost');
 //homepage
 Route::get('home/cart/{id?}', [homepageController::class, 'cartshow'])->name('home.cart');
 
 //payment
+Route::post('/stripePost/{user}', [StripePaymentController::class, 'stripePost'])->name('stripe.post');

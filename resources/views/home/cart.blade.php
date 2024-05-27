@@ -1,7 +1,7 @@
 @extends('layout.home')
 @section('title','cart')
 @section('basic')
-<form action="{{ route('buy.cart',['user'=>$user->id]) }}" method="post" id="buyForm">
+<form action="{{ route('stripe.post',['user'=>$user->id]) }}" method="POST" id="buyForm">
     @csrf
     <div class="row">
         <div class="col-md-10 offset-md-1 grid-margin stretch-card">

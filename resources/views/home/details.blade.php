@@ -36,11 +36,11 @@
             @if(isset($user))
               @if($user!=null)
             <div class="btn btn-primary m-2" style="color:white;"><a href="{{ route('home.addcart',['id'=>$product->id,'user_id'=>$user->id]) }}" style="color:white;">Add to Cart</a></div>
-            <div class="btn btn-info m-2"><a href="#" style="color:white;">Buy Now</a></div>
+            {{-- <div class="btn btn-info m-2"><a href="#" style="color:white;">Buy Now</a></div> --}}
             @endif
             @else
             <div class="btn btn-primary m-2" style="color:white;"><a href="{{url('/product/login')}}" style="color:white;">Add to Cart</a></div>
-            <div class="btn btn-info m-2"><a href="{{url('/product/login')}}" style="color:white;">Buy Now</a></div>
+            {{-- <div class="btn btn-info m-2"><a href="{{url('/product/login')}}" style="color:white;">Buy Now</a></div> --}}
 
             @endif
         </div>

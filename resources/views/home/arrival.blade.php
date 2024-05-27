@@ -1,27 +1,92 @@
-
-      <section class="arrival_section">
-        <div class="container">
-           <div class="box">
-              <div class="arrival_bg_box">
-                 <img src="/homepage/images/arrival-bg.png" alt="">
-              </div>
-              <div class="row">
-                 <div class="col-md-6 ml-auto">
-                    <div class="heading_container remove_line_bt">
-                       <h2>
-                          #NewArrivals
-                       </h2>
-                    </div>
-                    <p style="margin-top: 20px;margin-bottom: 30px;">
-                       Vitae fugiat laboriosam officia perferendis provident aliquid voluptatibus dolorem, fugit ullam sit earum id eaque nisi hic? Tenetur commodi, nisi rem vel, ea eaque ab ipsa, autem similique ex unde!
-                    </p>
-                    <a href="">
-                    Shop Now
-                    </a>
-                 </div>
-              </div>
-           </div>
-        </div>
-     </section>
-   
-     
+<section class="slider_section" id="home">
+    <div class="slider_bg_box">
+       <img src="/homepage/images/arrival.jpg" alt="">
+    </div>
+    <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+       <div class="carousel-inner">
+          <div class="carousel-item active">
+             <div class="container ">
+                <div class="row">
+                   <div class="col-md-7 col-lg-6 ">
+                      <div class="detail-box">
+                         <h1>
+                            <span>
+                            Sale 20% Off
+                            </span>
+                            <br>
+                            On Everything
+                         </h1>
+                         <p>
+                            Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                         </p>
+                         <div class="btn-box">
+                            <a href="" class="btn1">
+                            Shop Now
+                            </a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class="carousel-item ">
+             <div class="container ">
+                <div class="row">
+                   <div class="col-md-7 col-lg-6 ">
+                      <div class="detail-box">
+                         <h1>
+                            <span>
+                            Sale 20% Off
+                            </span>
+                            <br>
+                            On Everything
+                         </h1>
+                         <p>
+                            Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                         </p>
+                         <div class="btn-box">
+                            <a href="#product" class="btn1">
+                            Shop Now
+                            </a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class="carousel-item">
+             <div class="container ">
+                <div class="row">
+                   <div class="col-md-7 col-lg-6 ">
+                      <div class="detail-box">
+                         <h1>
+                            <span>
+                            Sale 20% Off
+                            </span>
+                            <br>
+                            On Everything
+                         </h1>
+                         <p>
+                            Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                         </p>
+                         <div class="btn-box">
+                            <a href="" class="btn1">
+                            Shop Now
+                            </a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="container">
+          <ol class="carousel-indicators">
+             <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+             <li data-target="#customCarousel1" data-slide-to="1"></li>
+             <li data-target="#customCarousel1" data-slide-to="2"></li>
+          </ol>
+       </div>
+    </div>
+ </section>
+ <!-- end slider section -->

@@ -19,9 +19,9 @@
                       <a href="{{ route('product.show',['id'=>$item->id,'user'=>$user->id]) }}" class="option1">
                         product details
                      </a>
-                      <a href="{{ route('buySingle.cart',['id'=>$item->id,'user'=>$user->id]) }}" class="option2">
+                      {{-- <a href="{{ route('buySingle.cart',['id'=>$item->id,'user'=>$user->id]) }}" class="option2">
                         Buy Now
-                        </a>
+                        </a> --}}
                         <a href="{{ route('home.addcart',['id'=>$item->id,'user_id'=>$user->id]) }}" class="option2">
                           add to cart
                           </a>
@@ -29,9 +29,9 @@
                       <a href="{{ route('product.show',['id'=>$item->id]) }}" class="option1">
                         product details
                      </a>
-                       <a href="{{url('/product/login')}}" class="option2">
+                       {{-- <a href="{{url('/product/login')}}" class="option2">
                         Buy Now
-                        </a>
+                        </a> --}}
 
                         <a href="{{url('/product/login')}}" class="option2">
                           Add to cart

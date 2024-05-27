@@ -12,60 +12,60 @@ class productController extends Controller
 {
     public function buy(Request $request, $user)
     {
-      //  Your code for handling the buy request
-        //Retrieve selected item IDs from the request
-        $user=Reg::find($user);
-         $selectedItemIds = $request->input('selected_items');
-         $quantities = $request->input('quantities');
-       //  dd($selectedItemIds);
-
-        $cartItems = Cart::whereIn('id', $selectedItemIds)->get();
-        //dd($cartItems->toarray());
-        foreach($cartItems as $cart_item){
-            $buyitems= new buy;
-            $buyitems->product_name= $cart_item->product_name;
-            $buyitems->product_price= $quantities[$cart_item->id]*$cart_item->product_price;
-            $buyitems->product_quantity = $quantities[$cart_item->id]; // Get the quantity for this cart item
-            $buyitems->image= $cart_item->image;
-            $buyitems->user_name=$user->name;
-            $buyitems->user_email=$user->email;
-            $buyitems->user_address=$user->cur_address;
-            $buyitems->user_contact=$user->phone;
-            $buyitems->save();
-        }
-    // Set a success message in the session
-   // session()->flash('success', 'Items successfully added to your purchase list.');
-   $product = Product::paginate(10);
-    // Redirect to the home page
-    return view('home.homepage',compact('user','product'))->withSuccess('Product is ordered');
-
-    }
-    public function buySingle($id, $user)
-    {
-        $item = Product::find($id);
+        // Retrieve the user
         $user = Reg::find($user);
 
-        // Check if the item is already bought by the user
-        $existingBuyItem = Buy::where('product_name', $item->name)
-            ->where('user_email', $user->email)
-            ->first();
+        // Decode JSON strings into objects
+        $cartItems = json_decode($request->input('cartItems'));
+        $quantities = json_decode($request->input('quantities'), true);
 
-        if (!$existingBuyItem) {
+        // Process each cart item
+        foreach ($cartItems as $cart_item) {
             $buyitems = new Buy;
-            $buyitems->product_name = $item['name'];
-            $buyitems->product_price = $item['discount'] ?? $item['price'];
-            $buyitems->image = $item['image'];
-            $buyitems->product_quantity = 1;
-            $buyitems->user_name = $user['name'];
-            $buyitems->user_email = $user['email'];
+            $buyitems->product_name = $cart_item->product_name;
+            $buyitems->product_price = $quantities[$cart_item->id] * $cart_item->product_price;
+            $buyitems->product_quantity = $quantities[$cart_item->id];
+            $buyitems->image = $cart_item->image;
+            $buyitems->user_name = $user->name;
+            $buyitems->user_email = $user->email;
             $buyitems->user_address = $user->cur_address;
             $buyitems->user_contact = $user->phone;
             $buyitems->save();
         }
-        $product= Product::paginate(10);
-        // Redirect to homepage to prevent duplicate insertion on page reload
-        return view('home.homepage',compact('user','product'))->with('success', 'Product ordered successfully');
+
+        // Retrieve products for pagination
+        $product = Product::paginate(10);
+
+        // Redirect to the home page with a success message
+        return view('home.homepage', compact('user', 'product'))->withSuccess('Product is ordered');
     }
+
+    // public function buySingle($id, $user)
+    // {
+    //     $item = Product::find($id);
+    //     $user = Reg::find($user);
+
+    //     // Check if the item is already bought by the user
+    //     $existingBuyItem = Buy::where('product_name', $item->name)
+    //         ->where('user_email', $user->email)
+    //         ->first();
+
+    //     if (!$existingBuyItem) {
+    //         $buyitems = new Buy;
+    //         $buyitems->product_name = $item['name'];
+    //         $buyitems->product_price = $item['discount'] ?? $item['price'];
+    //         $buyitems->image = $item['image'];
+    //         $buyitems->product_quantity = 1;
+    //         $buyitems->user_name = $user['name'];
+    //         $buyitems->user_email = $user['email'];
+    //         $buyitems->user_address = $user->cur_address;
+    //         $buyitems->user_contact = $user->phone;
+    //         $buyitems->save();
+    //     }
+    //     $product= Product::paginate(10);
+    //     // Redirect to homepage to prevent duplicate insertion on page reload
+    //     return view('home.homepage',compact('user','product'))->with('success', 'Product ordered successfully');
+    // }
 
     public function buycarterror()
     {

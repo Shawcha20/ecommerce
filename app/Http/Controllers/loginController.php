@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reg;
 use App\Models\product;
+use App\Models\Buy;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 class loginController extends Controller
@@ -32,12 +33,18 @@ class loginController extends Controller
             return view('home.homepage',compact('user','product'));
         }
         else{
+            $product= product::all()->count();
+            $order= Buy:: all()->count();
+            $customer= Reg::all()->count();
+            $totalOrderPrice = Buy::sum('product_price');
+            $processingCount = Buy::where('status', 'processing')->count();
+            $deliveredCount = Buy::where('status', 'delivered')->count();
             if ($req->has('remember')) {
                 // Set a "Remember Me" cookie
                 $cookie = cookie('remember_token', $user->remember_token, 60 * 24 * 30);
-                return view('admin.adminhome',compact('user'))->withCookie($cookie);
+                return view ('admin.adminhome',compact('user','product','order','customer','totalOrderPrice','processingCount','deliveredCount'))->withCookie($cookie);
             }
-            return view('admin.adminhome', compact('user'));
+            return view ('admin.adminhome',compact('user','product','order','customer','totalOrderPrice','processingCount','deliveredCount'));
         }
         }
 
