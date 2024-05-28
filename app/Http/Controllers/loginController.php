@@ -76,7 +76,7 @@ class loginController extends Controller
         $user->city = $req->city;
         $user->save();
         Session::put('user', $user);
-        return view('home.homepage',compact('user', 'product'));
+        return view('login');
     }
 
     public function logout()

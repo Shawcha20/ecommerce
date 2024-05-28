@@ -8,13 +8,14 @@ use App\Models\Cart;
 use App\Models\Buy;
 use App\Models\Reg;
 use App\Models\Product;
-
+use App\Models\Offers;
+use RealRashid\SweetAlert\Facades\Alert;
 class StripePaymentController extends Controller
 {
     public function stripePost(Request $request, $user)
     {
-      //  Your code for handling the buy request
-        //Retrieve selected item IDs from the request
+
+
         $user=Reg::find($user);
          $selectedItemIds = $request->input('selected_items');
          $quantities = $request->input('quantities');
@@ -28,6 +29,7 @@ class StripePaymentController extends Controller
         }
        // dd($price);
         //dd($cartItems->toarray());
+       
        return view('home.stripe',compact('user','price','cartItems','quantities'));
     }
 

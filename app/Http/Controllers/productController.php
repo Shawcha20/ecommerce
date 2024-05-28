@@ -7,6 +7,8 @@ use App\Models\Reg;
 use App\Models\product;
 use App\Models\cart;
 use App\Models\buy;
+use App\Models\offers;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Log;
 class productController extends Controller
 {
@@ -14,30 +16,35 @@ class productController extends Controller
     {
         // Retrieve the user
         $user = Reg::find($user);
-
+        $offer=offers::all();
         // Decode JSON strings into objects
         $cartItems = json_decode($request->input('cartItems'));
         $quantities = json_decode($request->input('quantities'), true);
 
-        // Process each cart item
-        foreach ($cartItems as $cart_item) {
-            $buyitems = new Buy;
-            $buyitems->product_name = $cart_item->product_name;
-            $buyitems->product_price = $quantities[$cart_item->id] * $cart_item->product_price;
-            $buyitems->product_quantity = $quantities[$cart_item->id];
-            $buyitems->image = $cart_item->image;
-            $buyitems->user_name = $user->name;
-            $buyitems->user_email = $user->email;
-            $buyitems->user_address = $user->cur_address;
-            $buyitems->user_contact = $user->phone;
-            $buyitems->save();
+
+        if (is_array($cartItems) && is_array($quantities)) {
+            foreach ($cartItems as $cart_item) {
+                $buyitems = new Buy;
+                $buyitems->product_name = $cart_item->product_name;
+                $buyitems->product_price = $quantities[$cart_item->id] * $cart_item->product_price;
+                $buyitems->product_quantity = $quantities[$cart_item->id];
+                $buyitems->image = $cart_item->image;
+                $buyitems->user_id=$user->id;
+                $buyitems->user_name = $user->name;
+                $buyitems->user_email = $user->email;
+                $buyitems->user_address = $user->cur_address;
+                $buyitems->user_contact = $user->phone;
+                $buyitems->save();
+            }
+        } else {
+            return redirect()->back()->withErrors('Invalid cart items or quantities.');
         }
 
         // Retrieve products for pagination
         $product = Product::paginate(10);
-
+        Alert::success('Product Order successfully','It will be delivered soon');
         // Redirect to the home page with a success message
-        return view('home.homepage', compact('user', 'product'))->withSuccess('Product is ordered');
+        return view('home.homepage', compact('user', 'product','offer'))->withSuccess('Product is ordered');
     }
 
     // public function buySingle($id, $user)
@@ -90,7 +97,7 @@ class productController extends Controller
     public function addcart($id, $user_id)
     {
         Log::info("addcart method called with product id: $id and user id: $user_id");
-
+        $offer= offers::all();
         $item = Product::find($id);
         $user = Reg::find($user_id);
         $product = Product::paginate(10);
@@ -99,19 +106,20 @@ class productController extends Controller
                                 ->where('user_email', $user->email)
                                 ->first();
         if ($existingCartItem) {
-            return view('home.homepage', compact('user','product'))->with('info', 'Product is already in the cart.');
+            return view('home.homepage', compact('user','product','offer'))->with('info', 'Product is already in the cart.');
         }
 
         $cart_item = new Cart;
         $cart_item->product_name = $item['name'];
         $cart_item->product_price = $item['discount'] ?? $item['price'];
         $cart_item->image = $item['image'];
+        $cart_item->user_id=$user->id;
         $cart_item->user_name = $user['name'];
         $cart_item->user_email = $user['email'];
         $cart_item->save();
-
+        Alert::success('Product Added Successfully','We Have added product to the cart');
         $product = Product::paginate(10);
-        return view('home.homepage', compact('product', 'user'))->withSuccess('Product added to cart');
+        return view('home.homepage', compact('product', 'user','offer'));
     }
 
     public function delete($id,$user_id)
@@ -122,7 +130,7 @@ class productController extends Controller
         return back()->withError("no data in database");
         else{
         $item->delete();
-        $cart_items= Cart::where('user_name', $user->name)->get();
+        $cart_items= Cart::where('user_id', $user->id)->get();
         return view('home.cart', compact('user','cart_items'));
       //  return back()->withSuccess("product deleted");
         }
@@ -130,19 +138,22 @@ class productController extends Controller
     public function show_order($user_id)
     {
         $user= Reg::find($user_id);
-        $ordered= Buy::all();
+        $ordered= Buy::where('user_id',$user_id)->get();
         return view('home.show_buy',compact('user','ordered'));
     }
     public function cancle_order($id,$user_id)
     {
         $item=buy::find($id);
-        if($item==null)
+        if($item==null){
+            Alert::error('no Product has been ordered');
         return back()->withError("no data in the buy table");
+        }
         else
         {
             $item->delete();
             $user=reg::find($user_id);
-            return back()->withSuccess("order cancled");
+            Alert::success('Order cancled successfully','The order has been cancled');
+            return back();
         }
     }
     public function search_product(Request $req,$user_id=null)

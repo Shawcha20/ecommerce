@@ -5,11 +5,11 @@
              <nav class="navbar navbar-expand-lg navbar-light bg-light custom_nav-container fixed-top">
                  <div class="container-fluid">
                         @if($user!=null)
-                     <a class="navbar-brand" href="{{ route('home.index',['user_id'=>$user->id]) }}"><img width="250"
-                             src="homepage/images/logo.png" alt="#" /></a>
+                     <a class="navbar-brand" href="{{ route('home.index',['user_id'=>$user->id]) }}"><img width="250" height="60"
+                             src="homepage/images/sahwchalogo.png" alt="#" /></a>
                         @else
                         <a class="navbar-brand" href="{{ route('home.index') }}"><img width="250"
-                            src="homepage/images/logo.png" alt="#" /></a>
+                            src="homepage/images/sahwchalogo.png" alt="#" /></a>
                          @endif
                      <button class="navbar-toggler" type="button" data-toggle="collapse"
                          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -24,15 +24,6 @@
                                  @else
                                  <a class="nav-link" href="{{ route('home.index',['user_id'=>$user->id]) }}">Home</a>
                                  @endif
-                             </li>
-                             <li class="nav-item dropdown">
-                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-                                     role="button" aria-haspopup="true" aria-expanded="false">Pages <span
-                                         class="caret"></span></a>
-                                 <ul class="dropdown-menu">
-                                     <li><a href="about.blade.php">About</a></li>
-                                     <li><a href="testimonial.html">Testimonial</a></li>
-                                 </ul>
                              </li>
                              <li class="nav-item">
                                  <a class="nav-link" href="{{ isset($user) ? route('product.home', ['user_id' => $user->id]) : route('product.home') }}">Products</a>
@@ -50,7 +41,7 @@
                              @endif
 
                              <li class="nav-item">
-                                 <a class="nav-link" href="#sub">Contact</a>
+                                 <a class="nav-link" href="#sub">Account</a>
                              </li>
                          </ul>
                          <ul class="navbar-nav ml-auto">
@@ -75,8 +66,8 @@
                                             <form action="{{ isset($user) ? route('search.product', ['user_id' => $user->id]) : route('search.product') }}" method="POST" class="d-flex">
                                                 @csrf
                                                 <input type="text" class="form-control mr-2" placeholder="Search" name="search">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                <button type="submit" class="btn btn-primary" style="height: 40px">
+                                                    <i class="fa fa-search" aria-hidden="true" style="height:10px;"></i>
                                                 </button>
                                             </form>
                                         </div>

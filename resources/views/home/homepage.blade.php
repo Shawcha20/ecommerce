@@ -14,6 +14,5 @@
 @include('home.slider')
 @include('home.why')
 @include('home.product')
-@include('home.sub')
 @include('home.footer')
 @endsection
